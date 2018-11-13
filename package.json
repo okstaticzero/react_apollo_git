@@ -5,7 +5,14 @@
   "devDependencies": {
     "react-scripts": "2.1.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "apollo-boost": "^0.1.20",
+    "graphql": "^14.0.2",
+    "react": "16.6.1",
+    "react-apollo": "^2.2.4",
+    "react-dom": "16.6.1",
+    "rebass": "^2.3.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
