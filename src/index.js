@@ -6,6 +6,7 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { Provider } from "rebass";
 import * as serviceWorker from "./serviceWorker";
 
 const httpLink = new HttpLink({
@@ -25,7 +26,9 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <App />
+    <Provider>
+      <App />
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 );
