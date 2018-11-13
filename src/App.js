@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import Organization from "./Organization";
+import Members from "./Members";
+import MemberDetails from "./MemberDetails";
 import { Input } from "rebass";
+import { Router, Link } from "@reach/router";
 import "./App.css";
 
 class App extends Component {
@@ -9,7 +11,10 @@ class App extends Component {
       <div className="App">
         <Input name="Hi" />
         <h1>OKOKOKO</h1>
-        <Organization />
+        <Members />
+        <Router>
+          <MemberDetails path="details" />
+        </Router>
       </div>
     );
   }

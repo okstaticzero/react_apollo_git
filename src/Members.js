@@ -1,7 +1,8 @@
 import React from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-
+import styled from "styled-components";
+import { Button } from "rebass";
 const GET_CURRENT_USER = gql`
   {
     organization(login: "ibm") {
@@ -15,14 +16,21 @@ const GET_CURRENT_USER = gql`
   }
 `;
 
+const List = styled.ul`
+  text-align: left;
+  list-style-type: none;
+`;
+
 const renderMembers = members => (
-  <ul>
+  <List>
     {members.map((member, i) => (
-      <li>{member.name}</li>
+      <li>
+        <Button>{member.name}</Button>
+      </li>
     ))}
-  </ul>
+  </List>
 );
-const Organization = () => (
+const Members = () => (
   <Query query={GET_CURRENT_USER}>
     {({ data, loading, error }) => {
       if (error) {
@@ -37,4 +45,4 @@ const Organization = () => (
     }}
   </Query>
 );
-export default Organization;
+export default Members;
