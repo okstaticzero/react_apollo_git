@@ -5,11 +5,12 @@ import styled from "styled-components";
 import { Button } from "rebass";
 const GET_CURRENT_USER = gql`
   {
-    organization(login: "ibm") {
+    organization(login: "reactjs") {
       members(first: 5) {
         nodes {
           name
           bio
+          login
         }
       }
     }
@@ -21,16 +22,7 @@ const List = styled.ul`
   list-style-type: none;
 `;
 
-const renderMembers = members => (
-  <List>
-    {members.map((member, i) => (
-      <li>
-        <Button>{member.name}</Button>
-      </li>
-    ))}
-  </List>
-);
-const Members = () => (
+const Members = ({ onSelectMember }) => (
   <Query query={GET_CURRENT_USER}>
     {({ data, loading, error }) => {
       if (error) {
@@ -40,8 +32,17 @@ const Members = () => (
         return <h1>Loading</h1>;
       }
       const members = data.organization.members.nodes;
-      console.log("data", members);
-      return <div>{renderMembers(members)}</div>;
+      return (
+        <List>
+          {members.map((member, i) => (
+            <li>
+              <Button onClick={() => onSelectMember(member.login)}>
+                {member.name}
+              </Button>
+            </li>
+          ))}
+        </List>
+      );
     }}
   </Query>
 );
