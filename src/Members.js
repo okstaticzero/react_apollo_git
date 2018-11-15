@@ -2,10 +2,11 @@ import React from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import styled from "styled-components";
-import { Button } from "rebass";
+import { Link } from "@reach/router";
+
 const GET_CURRENT_USER = gql`
-  {
-    organization(login: "reactjs") {
+  query Members($name: String!) {
+    organization(login: $name) {
       members(first: 5) {
         nodes {
           name
@@ -22,8 +23,8 @@ const List = styled.ul`
   list-style-type: none;
 `;
 
-const Members = ({ onSelectMember }) => (
-  <Query query={GET_CURRENT_USER}>
+const Members = ({ name }) => (
+  <Query query={GET_CURRENT_USER} variables={{ name }}>
     {({ data, loading, error }) => {
       if (error) {
         return <h1>Error: {error}</h1>;
@@ -35,10 +36,8 @@ const Members = ({ onSelectMember }) => (
       return (
         <List>
           {members.map((member, i) => (
-            <li>
-              <Button onClick={() => onSelectMember(member.login)}>
-                {member.name}
-              </Button>
+            <li key={member.login}>
+              <Link to={`/member/${member.login}`}>{member.name}</Link>
             </li>
           ))}
         </List>

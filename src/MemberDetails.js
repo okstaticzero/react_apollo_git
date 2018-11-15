@@ -4,8 +4,8 @@ import { Query } from "react-apollo";
 import styled from "styled-components";
 
 const GET_USER = gql`
-  {
-    user(login: "zerostatic") {
+  query Members($login: String!) {
+    user(login: $login) {
       name
       avatarUrl
       repositories(first: 100, orderBy: { field: NAME, direction: ASC }) {
@@ -23,8 +23,8 @@ const List = styled.ul`
   list-style-type: none;
 `;
 
-const MemberDetails = () => (
-  <Query query={GET_USER}>
+const MemberDetails = ({ login }) => (
+  <Query query={GET_USER} variables={{ login }}>
     {({ data, loading, error }) => {
       if (error) {
         return <h1>Error: {error}</h1>;

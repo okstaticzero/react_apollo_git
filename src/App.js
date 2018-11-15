@@ -6,17 +6,14 @@ import { Router, Link } from "@reach/router";
 import "./App.css";
 
 class App extends Component {
-  selectMember = id => {
-    alert(id);
-  };
   render() {
     return (
       <div className="App">
         <Input name="Hi" />
         <h1>OKOKOKO</h1>
-        <Members onSelectMember={this.selectMember} />
+        <Members name="ibm" />
         <Router>
-          <MemberDetails path="details" />
+          <MemberDetails path="member/:login" />
         </Router>
       </div>
     );
