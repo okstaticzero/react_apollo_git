@@ -27,7 +27,8 @@ const Members = ({ name }) => (
   <Query query={GET_CURRENT_USER} variables={{ name }}>
     {({ data, loading, error }) => {
       if (error) {
-        return <h1>Error: {error}</h1>;
+        console.log("XXXXX error", error.toString());
+        return <h1>Error: {error.toString()}</h1>;
       }
       if (loading || !data) {
         return <h1>Loading</h1>;
